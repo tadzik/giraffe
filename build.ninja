@@ -1,0 +1,9 @@
+rule compile
+    command = 6g $in
+
+rule link
+    command = 6l $in
+
+build parser.6: compile parser.go
+build lisp.6:   compile lisp.go | parser.6
+build 6.out:    link lisp.6     | parser.6 lisp.6
